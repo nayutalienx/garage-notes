@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nayutalienx.github.io/garage-notes/sitemap-index.xml

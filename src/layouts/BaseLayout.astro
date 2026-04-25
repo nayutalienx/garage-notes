@@ -7,15 +7,34 @@ interface Props {
 	title: string;
 	description: string;
 	lang?: 'en' | 'ru';
+	ogType?: 'website' | 'article';
+	pubDate?: Date;
+	updatedDate?: Date;
+	tags?: string[];
 }
 
-const { title, description, lang = 'en' } = Astro.props;
+const {
+	title,
+	description,
+	lang = 'en',
+	ogType = 'website',
+	pubDate,
+	updatedDate,
+	tags = [],
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			ogType={ogType}
+			pubDate={pubDate}
+			updatedDate={updatedDate}
+			tags={tags}
+		/>
 	</head>
 	<body>
 		<Header />

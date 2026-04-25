@@ -26,7 +26,15 @@ const {
 } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} lang={language}>
+<BaseLayout
+	title={title}
+	description={description}
+	lang={language}
+	ogType="article"
+	pubDate={pubDate}
+	updatedDate={updatedDate}
+	tags={tags}
+>
 	<article class="content-entry">
 		<header class="entry-header">
 			<p class="eyebrow">{kind}{status ? ` - ${status}` : ''}</p>

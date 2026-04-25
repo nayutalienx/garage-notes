@@ -6,9 +6,13 @@ import { withBase } from '../lib/content';
 interface Props {
 	title: string;
 	description: string;
+	ogType?: 'website' | 'article';
+	pubDate?: Date;
+	updatedDate?: Date;
+	tags?: string[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogType = 'website', pubDate, updatedDate, tags = [] } = Astro.props;
 const pageTitle = title === SITE_TITLE ? title : `${title} | ${SITE_TITLE}`;
 const siteBase = Astro.site ?? Astro.url;
 const canonicalURL = new URL(Astro.url.pathname, siteBase);
@@ -32,10 +36,22 @@ const rssURL = new URL(withBase('rss.xml'), siteBase);
 <meta name="title" content={pageTitle} />
 <meta name="description" content={description} />
 
-<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
+{
+	ogType === 'article' && (
+		<>
+			{pubDate && <meta property="article:published_time" content={pubDate.toISOString()} />}
+			{updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()} />}
+			{tags.map((tag) => (
+				<meta property="article:tag" content={tag} />
+			))}
+		</>
+	)
+}
 
 <meta property="twitter:card" content="summary" />
 <meta property="twitter:url" content={canonicalURL} />
