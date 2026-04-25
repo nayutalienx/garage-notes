@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { collectTags, isPublished, withBase } from '../../lib/content';
+
+const blog = (await getCollection('blog')).filter(isPublished);
+const notes = (await getCollection('notes')).filter(isPublished);
+const tags = collectTags([...blog, ...notes]);
+---
+
+<BaseLayout title="Tags" description="Browse Garage Notes by tag.">
+	<section class="page-heading">
+		<p class="eyebrow">Tags</p>
+		<h1>Topics</h1>
+		<p class="lead">A lightweight index across posts and notes.</p>
+	</section>
+
+	{
+		tags.length > 0 ? (
+			<ul class="tag-cloud">
+				{tags.map((tag) => (
+					<li>
+						<a href={withBase(`tags/${tag.slug}/`)}>
+							{tag.tag} <span>{tag.count}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		) : (
+			<p class="muted">No tags published yet.</p>
+		)
+	}
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { getCollection } from 'astro:content';
+import EntryList from '../../components/EntryList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byPubDateDesc, isPublished } from '../../lib/content';
+
+const notes = (await getCollection('notes')).filter(isPublished).sort(byPubDateDesc);
+---
+
+<BaseLayout title="Notes" description="Short work-in-progress notes from Garage Notes.">
+	<section class="page-heading">
+		<p class="eyebrow">Notes</p>
+		<h1>Work in Progress</h1>
+		<p class="lead">Short logs, experiments, and fragments that are still useful before they become full posts.</p>
+	</section>
+	<EntryList entries={notes} emptyText="No notes published yet." />
+</BaseLayout>

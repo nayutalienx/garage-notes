@@ -1,0 +1,43 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import { entryKind, entryUrl, tagSlug, withBase, type Entry } from '../lib/content';
+
+interface Props {
+	entries: Entry[];
+	emptyText?: string;
+	showCollection?: boolean;
+}
+
+const { entries, emptyText = 'Nothing published yet.', showCollection = false } = Astro.props;
+---
+
+{
+	entries.length > 0 ? (
+		<ul class="entry-list">
+			{entries.map((entry) => (
+				<li class="entry-item">
+					<a class="entry-title" href={entryUrl(entry)}>
+						{entry.data.title}
+					</a>
+					<p class="entry-meta">
+						{showCollection && <span>{entryKind(entry)} - </span>}
+						<FormattedDate date={entry.data.pubDate} />
+						{entry.collection === 'notes' && entry.data.status && <span> - {entry.data.status}</span>}
+					</p>
+					<p>{entry.data.description}</p>
+					{entry.data.tags.length > 0 && (
+						<ul class="tag-list" aria-label="Tags">
+							{entry.data.tags.map((tag) => (
+								<li>
+									<a href={withBase(`tags/${tagSlug(tag)}/`)}>{tag}</a>
+								</li>
+							))}
+						</ul>
+					)}
+				</li>
+			))}
+		</ul>
+	) : (
+		<p class="muted">{emptyText}</p>
+	)
+}

@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { withBase } from '../lib/content';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, class: className, ...props } = Astro.props;
+const internalHref = href?.toString() ?? '/';
+const resolvedHref = internalHref.startsWith('http')
+	? internalHref
+	: withBase(internalHref);
+const targetPath = new URL(resolvedHref, Astro.url).pathname;
+const isRoot = targetPath === new URL(withBase('/'), Astro.url).pathname;
+const isActive = isRoot
+	? Astro.url.pathname === targetPath
+	: Astro.url.pathname === targetPath || Astro.url.pathname.startsWith(targetPath);
+---
+
+<a href={resolvedHref} class:list={[className, { active: isActive }]} {...props}>
+	<slot />
+</a>

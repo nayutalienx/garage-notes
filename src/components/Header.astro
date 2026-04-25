@@ -1,0 +1,19 @@
+---
+import { REPO_URL, SITE_TITLE } from '../consts';
+import { withBase } from '../lib/content';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header class="site-header">
+	<nav class="site-nav">
+		<a class="site-title" href={withBase('/')}>{SITE_TITLE}</a>
+		<div class="nav-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/blog/">Blog</HeaderLink>
+			<HeaderLink href="/notes/">Notes</HeaderLink>
+			<HeaderLink href="/tags/">Tags</HeaderLink>
+			<HeaderLink href="/about/">About</HeaderLink>
+		</div>
+		<a class="repo-link" href={REPO_URL} target="_blank" rel="noreferrer">GitHub</a>
+	</nav>
+</header>

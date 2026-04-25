@@ -1,0 +1,20 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ContentEntry from './ContentEntry.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, tags, language } = Astro.props;
+---
+
+<ContentEntry
+	title={title}
+	description={description}
+	pubDate={pubDate}
+	updatedDate={updatedDate}
+	tags={tags}
+	language={language}
+	kind="Blog"
+>
+	<slot />
+</ContentEntry>

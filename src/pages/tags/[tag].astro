@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import EntryList from '../../components/EntryList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byPubDateDesc, collectTags, isPublished, tagSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const blog = (await getCollection('blog')).filter(isPublished);
+	const notes = (await getCollection('notes')).filter(isPublished);
+	const entries = [...blog, ...notes];
+	const tags = collectTags(entries);
+
+	return tags.map((tag) => ({
+		params: { tag: tag.slug },
+		props: {
+			tag: tag.tag,
+			entries: entries
+				.filter((entry) => entry.data.tags.some((entryTag) => tagSlug(entryTag) === tag.slug))
+				.sort(byPubDateDesc),
+		},
+	}));
+}
+
+const { tag, entries } = Astro.props;
+---
+
+<BaseLayout title={`Tag: ${tag}`} description={`Posts and notes tagged ${tag}.`}>
+	<section class="page-heading">
+		<p class="eyebrow">Tag</p>
+		<h1>{tag}</h1>
+	</section>
+	<EntryList entries={entries} showCollection />
+</BaseLayout>

@@ -1,0 +1,11 @@
+---
+import { REPO_URL, SITE_TITLE } from '../consts';
+import { withBase } from '../lib/content';
+
+const today = new Date();
+---
+
+<footer class="site-footer">
+	<p>&copy; {today.getFullYear()} {SITE_TITLE}.</p>
+	<p><a href={REPO_URL} target="_blank" rel="noreferrer">Repository</a> - <a href={withBase('rss.xml')}>RSS</a></p>
+</footer>

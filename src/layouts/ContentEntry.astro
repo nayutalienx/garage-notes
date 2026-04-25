@@ -1,0 +1,53 @@
+---
+import FormattedDate from '../components/FormattedDate.astro';
+import BaseLayout from './BaseLayout.astro';
+import { tagSlug, withBase } from '../lib/content';
+
+interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	updatedDate?: Date;
+	tags?: string[];
+	language?: 'en' | 'ru';
+	status?: string;
+	kind: 'Blog' | 'Note';
+}
+
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	tags = [],
+	language = 'en',
+	status,
+	kind,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} lang={language}>
+	<article class="content-entry">
+		<header class="entry-header">
+			<p class="eyebrow">{kind}{status ? ` - ${status}` : ''}</p>
+			<h1>{title}</h1>
+			<p class="lead">{description}</p>
+			<p class="entry-meta">
+				Published <FormattedDate date={pubDate} />
+				{updatedDate && <span> - Updated <FormattedDate date={updatedDate} /></span>}
+			</p>
+			{tags.length > 0 && (
+				<ul class="tag-list" aria-label="Tags">
+					{tags.map((tag) => (
+						<li>
+							<a href={withBase(`tags/${tagSlug(tag)}/`)}>{tag}</a>
+						</li>
+					))}
+				</ul>
+			)}
+		</header>
+		<div class="prose">
+			<slot />
+		</div>
+	</article>
+</BaseLayout>
