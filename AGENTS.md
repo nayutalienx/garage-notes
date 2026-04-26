@@ -24,8 +24,9 @@ The main idea is to publish small work-in-progress notes instead of waiting for 
 - Prefer clear titles that are searchable.
 - Good title example: `Windows volume isolation: why ACLs are not enough`
 - Bad title example: `random thoughts`
-- Use English by default.
-- Russian is allowed if the topic is mostly local or Russian-speaking.
+- English is the priority language for articles and notes.
+- Write in English by default even when the conversation is in another language.
+- Write in Russian or another non-English language only when the user explicitly asks for that language.
 - Do not invent facts.
 - Mark uncertainty clearly.
 - Do not publish private data, tokens, passwords, API keys, IPs, banking details, legal case details, or NDA content.
