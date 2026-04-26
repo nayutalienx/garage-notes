@@ -21,6 +21,27 @@ export function byPubDateDesc(a: Entry, b: Entry) {
 	return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 }
 
+export function canonicalEntries<T extends Entry>(entries: T[]) {
+	const groups = new Map<string, T[]>();
+
+	for (const entry of entries) {
+		const key = entry.data.translationKey ?? `${entry.collection}:${entry.id}`;
+		const group = groups.get(key);
+		if (group) {
+			group.push(entry);
+		} else {
+			groups.set(key, [entry]);
+		}
+	}
+
+	return [...groups.values()]
+		.map((group) => {
+			const sorted = [...group].sort(byPubDateDesc);
+			return sorted.find((entry) => entry.data.language === 'en') ?? sorted[0];
+		})
+		.sort(byPubDateDesc);
+}
+
 export function entryUrl(entry: Entry) {
 	return withBase(`${entry.collection}/${entry.id}/`);
 }

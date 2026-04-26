@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 import EntryList from '../../components/EntryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { byPubDateDesc, collectTags, isPublished, tagSlug } from '../../lib/content';
+import { canonicalEntries, collectTags, isPublished, tagSlug } from '../../lib/content';
 
 export async function getStaticPaths() {
-	const blog = (await getCollection('blog')).filter(isPublished);
+	const blog = canonicalEntries((await getCollection('blog')).filter(isPublished));
 	const notes = (await getCollection('notes')).filter(isPublished);
 	const entries = [...blog, ...notes];
 	const tags = collectTags(entries);
@@ -14,9 +14,9 @@ export async function getStaticPaths() {
 		params: { tag: tag.slug },
 		props: {
 			tag: tag.tag,
-			entries: entries
-				.filter((entry) => entry.data.tags.some((entryTag) => tagSlug(entryTag) === tag.slug))
-				.sort(byPubDateDesc),
+			entries: entries.filter((entry) =>
+				entry.data.tags.some((entryTag) => tagSlug(entryTag) === tag.slug),
+			),
 		},
 	}));
 }

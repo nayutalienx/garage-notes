@@ -3,9 +3,9 @@ import { getCollection } from 'astro:content';
 import EntryList from '../components/EntryList.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { byPubDateDesc, isPublished, withBase } from '../lib/content';
+import { byPubDateDesc, canonicalEntries, isPublished, withBase } from '../lib/content';
 
-const posts = (await getCollection('blog')).filter(isPublished).sort(byPubDateDesc).slice(0, 3);
+const posts = canonicalEntries((await getCollection('blog')).filter(isPublished)).slice(0, 3);
 const notes = (await getCollection('notes')).filter(isPublished).sort(byPubDateDesc).slice(0, 5);
 ---
 

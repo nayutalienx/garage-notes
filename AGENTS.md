@@ -18,6 +18,8 @@ The main idea is to publish small work-in-progress notes instead of waiting for 
 
 - Blog posts are polished long-form articles.
 - Notes are short work-in-progress logs.
+- Multilingual versions of the same blog post must share the same `translationKey`.
+- Index pages, tag pages, the homepage, and RSS should show only one canonical entry per `translationKey`; prefer the English version when it exists, with other languages reachable from the article language switcher.
 - Prefer clear titles that are searchable.
 - Good title example: `Windows volume isolation: why ACLs are not enough`
 - Bad title example: `random thoughts`

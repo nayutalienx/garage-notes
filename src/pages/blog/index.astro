@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content';
 import EntryList from '../../components/EntryList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { byPubDateDesc, isPublished } from '../../lib/content';
+import { canonicalEntries, isPublished } from '../../lib/content';
 
-const posts = (await getCollection('blog')).filter(isPublished).sort(byPubDateDesc);
+const posts = canonicalEntries((await getCollection('blog')).filter(isPublished));
 ---
 
 <BaseLayout title="Blog" description="Polished technical posts from Garage Notes.">

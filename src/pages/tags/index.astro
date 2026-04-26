@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { collectTags, isPublished, withBase } from '../../lib/content';
+import { canonicalEntries, collectTags, isPublished, withBase } from '../../lib/content';
 
-const blog = (await getCollection('blog')).filter(isPublished);
+const blog = canonicalEntries((await getCollection('blog')).filter(isPublished));
 const notes = (await getCollection('notes')).filter(isPublished);
 const tags = collectTags([...blog, ...notes]);
 ---
