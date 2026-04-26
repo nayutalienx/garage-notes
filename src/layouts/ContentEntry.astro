@@ -10,6 +10,11 @@ interface Props {
 	updatedDate?: Date;
 	tags?: string[];
 	language?: 'en' | 'ru';
+	translations?: Array<{
+		language: 'en' | 'ru';
+		title: string;
+		url: string;
+	}>;
 	status?: string;
 	kind: 'Blog' | 'Note';
 }
@@ -21,9 +26,16 @@ const {
 	updatedDate,
 	tags = [],
 	language = 'en',
+	translations = [],
 	status,
 	kind,
 } = Astro.props;
+
+const languageNames = {
+	en: 'English',
+	ru: 'Русский',
+};
+const translationLabel = language === 'ru' ? 'Доступно также:' : 'Also available:';
 ---
 
 <BaseLayout
@@ -44,6 +56,16 @@ const {
 				Published <FormattedDate date={pubDate} />
 				{updatedDate && <span> - Updated <FormattedDate date={updatedDate} /></span>}
 			</p>
+			{translations.length > 0 && (
+				<nav class="language-switcher" aria-label="Translations">
+					<span>{translationLabel}</span>
+					{translations.map((translation) => (
+						<a href={translation.url} hreflang={translation.language} lang={translation.language}>
+							{languageNames[translation.language]}
+						</a>
+					))}
+				</nav>
+			)}
 			{tags.length > 0 && (
 				<ul class="tag-list" aria-label="Tags">
 					{tags.map((tag) => (

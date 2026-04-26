@@ -2,9 +2,17 @@
 import type { CollectionEntry } from 'astro:content';
 import ContentEntry from './ContentEntry.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type TranslationLink = {
+	language: 'en' | 'ru';
+	title: string;
+	url: string;
+};
 
-const { title, description, pubDate, updatedDate, tags, language } = Astro.props;
+type Props = CollectionEntry<'blog'>['data'] & {
+	translations?: TranslationLink[];
+};
+
+const { title, description, pubDate, updatedDate, tags, language, translations = [] } = Astro.props;
 ---
 
 <ContentEntry
@@ -14,6 +22,7 @@ const { title, description, pubDate, updatedDate, tags, language } = Astro.props
 	updatedDate={updatedDate}
 	tags={tags}
 	language={language}
+	translations={translations}
 	kind="Blog"
 >
 	<slot />

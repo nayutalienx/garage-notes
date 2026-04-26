@@ -11,6 +11,7 @@ const sharedFields = {
 	tags: z.array(z.string().min(1)).default([]),
 	draft: z.boolean().default(false),
 	language,
+	translationKey: z.string().min(1).optional(),
 };
 
 const blog = defineCollection({

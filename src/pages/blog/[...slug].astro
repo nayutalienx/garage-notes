@@ -1,21 +1,43 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { isPublished } from '../../lib/content';
+import { entryUrl, isPublished } from '../../lib/content';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).filter(isPublished);
 	return posts.map((post) => ({
 		params: { slug: post.id },
-		props: post,
+		props: {
+			post,
+			translations: post.data.translationKey
+				? posts
+						.filter(
+							(candidate) =>
+								candidate.id !== post.id &&
+								candidate.data.translationKey === post.data.translationKey,
+						)
+						.map((candidate) => ({
+							language: candidate.data.language,
+							title: candidate.data.title,
+							url: entryUrl(candidate),
+						}))
+				: [],
+		},
 	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = {
+	post: CollectionEntry<'blog'>;
+	translations: Array<{
+		language: 'en' | 'ru';
+		title: string;
+		url: string;
+	}>;
+};
 
-const post = Astro.props;
+const { post, translations } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} translations={translations}>
 	<Content />
 </BlogPost>

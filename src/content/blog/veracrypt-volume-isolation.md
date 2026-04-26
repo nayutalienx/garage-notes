@@ -6,6 +6,7 @@ updatedDate: 2026-04-26
 tags: ["windows", "security", "veracrypt", "drivers"]
 draft: false
 language: "ru"
+translationKey: "securevol-veracrypt-volume-isolation"
 ---
 
 ## Контекст

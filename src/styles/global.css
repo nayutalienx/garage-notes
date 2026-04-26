@@ -328,6 +328,31 @@ hr {
 	color: var(--surface);
 }
 
+.language-switcher {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	align-items: center;
+	margin: 1rem 0 0;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+.language-switcher a {
+	display: inline-block;
+	padding: 0.18rem 0.55rem;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: var(--surface);
+	color: var(--text);
+	text-decoration: none;
+}
+
+.language-switcher a:hover {
+	border-color: var(--accent);
+	color: var(--accent-strong);
+}
+
 .content-entry {
 	width: min(100%, 720px);
 }
