@@ -1,4 +1,4 @@
-# Garage Notes Agent Guide
+# Blog Agent Guide
 
 ## Project Purpose
 
@@ -72,7 +72,7 @@ The main idea is to publish small work-in-progress notes instead of waiting for 
 - Deploy happens from `main` through GitHub Actions.
 - Do not use a `gh-pages` branch unless explicitly requested.
 - If the repo name is not `${OWNER}.github.io`, Astro `base` must match `/${REPO_NAME}`.
-- This repo is a project page, so `astro.config.mjs` uses `base: "/garage-notes"`.
+- This repo is a project page, so `astro.config.mjs` uses `base: "/blog"`.
 - After changing routing or config, verify the production base path.
 
 ## Git Rules

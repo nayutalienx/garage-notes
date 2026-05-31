@@ -1,6 +1,6 @@
 export const OWNER = 'nayutalienx';
-export const REPO_NAME = 'garage-notes';
-export const SITE_TITLE = 'Garage Notes';
+export const REPO_NAME = 'blog';
+export const SITE_TITLE = 'Blog';
 export const SITE_DESCRIPTION = 'Engineering notes, experiments, and unfinished thoughts.';
 export const SITE_EMAIL = 'nayutalienx@gmail.com';
 export const SITE_X_URL = 'https://x.com/mugiwara_byte';

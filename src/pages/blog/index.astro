@@ -7,7 +7,7 @@ import { canonicalEntries, isPublished } from '../../lib/content';
 const posts = canonicalEntries((await getCollection('blog')).filter(isPublished));
 ---
 
-<BaseLayout title="Blog" description="Polished technical posts from Garage Notes.">
+<BaseLayout title="Blog" description="Polished technical posts from the blog.">
 	<div class="home">
 		<h2 class="post-list-heading">Posts</h2>
 		<EntryList entries={posts} emptyText="No blog posts published yet." />

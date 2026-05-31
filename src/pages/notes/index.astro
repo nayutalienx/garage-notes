@@ -7,7 +7,7 @@ import { byPubDateDesc, isPublished } from '../../lib/content';
 const notes = (await getCollection('notes')).filter(isPublished).sort(byPubDateDesc);
 ---
 
-<BaseLayout title="Notes" description="Short work-in-progress notes from Garage Notes.">
+<BaseLayout title="Notes" description="Short work-in-progress notes from the blog.">
 	<section class="page-heading">
 		<p class="eyebrow">Notes</p>
 		<h1>Work in Progress</h1>

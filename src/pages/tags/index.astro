@@ -8,7 +8,7 @@ const notes = (await getCollection('notes')).filter(isPublished);
 const tags = collectTags([...blog, ...notes]);
 ---
 
-<BaseLayout title="Tags" description="Browse Garage Notes by tag.">
+<BaseLayout title="Tags" description="Browse the blog by tag.">
 	<section class="page-heading">
 		<p class="eyebrow">Tags</p>
 		<h1>Topics</h1>

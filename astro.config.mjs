@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
 const owner = 'nayutalienx';
-const repo = 'garage-notes';
+const repo = 'blog';
 const isUserSite = String(repo) === `${owner}.github.io`;
 
 // https://astro.build/config

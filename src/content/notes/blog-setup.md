@@ -14,7 +14,7 @@ The site is built with Astro and content collections. Blog posts live in `src/co
 
 ## GitHub Pages
 
-The site is configured as a GitHub Pages project page. Because the repository is named `garage-notes`, Astro uses the `/garage-notes` base path.
+The site is configured as a GitHub Pages project page. Because the repository is named `blog`, Astro uses the `/blog` base path.
 
 ## GitHub Actions
 
